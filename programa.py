@@ -1,5 +1,5 @@
 from funcoes import define_posicoes, preenche_frota, posicao_valida, faz_jogada, posiciona_frota, afundados
-
+import random 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
     texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
@@ -76,6 +76,7 @@ tabuleiro_jogador = posiciona_frota(frota)
 
 jogadas = []
 jogando = True
+jogadas_oponente=[]
 
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
@@ -103,3 +104,18 @@ while jogando:
     if afundados(frota_oponente, tabuleiro_oponente) == 10:
         print("Parabéns! Você derrubou todos os navios do seu oponente!")
         jogando = False
+    else:
+        repetida = True
+        while repetida:
+            linha_op = random.randint(0, 9)
+            coluna_op = random.randint(0, 9)
+            if [linha_op, coluna_op] not in jogadas_oponente:
+                repetida = False
+
+        jogadas_oponente.append([linha_op, coluna_op])
+        print(f"Seu oponente está atacando na linha {linha_op} e coluna {coluna_op}")
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador, linha_op, coluna_op)
+
+        if afundados(frota, tabuleiro_jogador) == 10:
+            print("Xi! O oponente derrubou toda a sua frota =(")
+            jogando = False
