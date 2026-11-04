@@ -78,22 +78,6 @@
 #         texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
 #     return texto
 
-import sys
-
-MAX_LEITURAS = 3000
-leituras = 0
-
-
-def le_inteiro(texto):
-    global leituras
-    leituras += 1
-    if leituras > MAX_LEITURAS:
-        sys.exit()
-    try:
-        return int(input(texto))
-    except (EOFError, ValueError):
-        sys.exit()
-
 
 def define_posicoes(linha, coluna, orientacao, tamanho):
     posicoes = []
